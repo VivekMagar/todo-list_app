@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Focus Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <main class="dashboard">
+        <!-- Clock Widget -->
+        <section class="widget glass-panel" id="clock-widget">
+            <div class="widget-header">
+                <i class="fa-solid fa-clock"></i> Local Time
+            </div>
+            <div class="widget-content center-content">
+                <div id="time" class="time-display">00:00:00</div>
+                <div id="date" class="date-display">...</div>
+            </div>
+        </section>
+
+        <!-- Weather Widget -->
+        <section class="widget glass-panel" id="weather-widget">
+            <div class="widget-header">
+                <i class="fa-solid fa-cloud-sun"></i> Live Weather
+            </div>
+            <div class="widget-content center-content">
+                <select id="city-select" class="glass-select">
+                    <option value="52.3676,4.9041">Amsterdam, Netherlands</option>
+                    <option value="42.5063,1.5218">Andorra la Vella, Andorra</option>
+                    <option value="37.9838,23.7275">Athens, Greece</option>
+                    <option value="44.8125,20.4612">Belgrade, Serbia</option>
+                    <option value="52.5200,13.4050">Berlin, Germany</option>
+                    <option value="46.9480,7.4474">Bern, Switzerland</option>
+                    <option value="48.1486,17.1077">Bratislava, Slovakia</option>
+                    <option value="50.8503,4.3517">Brussels, Belgium</option>
+                    <option value="44.4268,26.1025">Bucharest, Romania</option>
+                    <option value="47.4979,19.0402">Budapest, Hungary</option>
+                    <option value="47.0105,28.8638">Chisinau, Moldova</option>
+                    <option value="55.6761,12.5683">Copenhagen, Denmark</option>
+                    <option value="53.3498,-6.2603">Dublin, Ireland</option>
+                    <option value="60.1695,24.9354">Helsinki, Finland</option>
+                    <option value="27.7172,85.3240">Kathmandu, Nepal</option>
+                    <option value="50.4501,30.5234">Kyiv, Ukraine</option>
+                    <option value="38.7223,-9.1393">Lisbon, Portugal</option>
+                    <option value="46.0569,14.5058">Ljubljana, Slovenia</option>
+                    <option value="51.5074,-0.1278" selected>London, UK</option>
+                    <option value="49.6116,6.1319">Luxembourg, Luxembourg</option>
+                    <option value="40.4168,-3.7038">Madrid, Spain</option>
+                    <option value="53.9006,27.5590">Minsk, Belarus</option>
+                    <option value="43.7384,7.4246">Monaco, Monaco</option>
+                    <option value="55.7558,37.6173">Moscow, Russia</option>
+                    <option value="28.6139,77.2090">New Delhi, India</option>
+                    <option value="40.7128,-74.0060">New York, USA</option>
+                    <option value="35.1856,33.3823">Nicosia, Cyprus</option>
+                    <option value="59.9139,10.7522">Oslo, Norway</option>
+                    <option value="48.8566,2.3522">Paris, France</option>
+                    <option value="42.4411,19.2636">Podgorica, Montenegro</option>
+                    <option value="50.0755,14.4378">Prague, Czech Republic</option>
+                    <option value="42.6629,21.1655">Pristina, Kosovo</option>
+                    <option value="64.1466,-21.9426">Reykjavik, Iceland</option>
+                    <option value="56.9496,24.1052">Riga, Latvia</option>
+                    <option value="41.9028,12.4964">Rome, Italy</option>
+                    <option value="43.9346,12.4473">San Marino, San Marino</option>
+                    <option value="43.8563,18.4131">Sarajevo, Bosnia & Herzegovina</option>
+                    <option value="42.0000,21.4333">Skopje, North Macedonia</option>
+                    <option value="42.6977,23.3219">Sofia, Bulgaria</option>
+                    <option value="59.3293,18.0686">Stockholm, Sweden</option>
+                    <option value="-33.8688,151.2093">Sydney, Australia</option>
+                    <option value="59.4370,24.7536">Tallinn, Estonia</option>
+                    <option value="41.3275,19.8187">Tirana, Albania</option>
+                    <option value="35.6762,139.6503">Tokyo, Japan</option>
+                    <option value="47.1410,9.5209">Vaduz, Liechtenstein</option>
+                    <option value="35.8989,14.5146">Valletta, Malta</option>
+                    <option value="41.9029,12.4534">Vatican City, Vatican City</option>
+                    <option value="48.2082,16.3738">Vienna, Austria</option>
+                    <option value="54.6872,25.2797">Vilnius, Lithuania</option>
+                    <option value="52.2297,21.0122">Warsaw, Poland</option>
+                    <option value="45.8150,15.9819">Zagreb, Croatia</option>
+                </select>
+                <div class="weather-info">
+                    <div id="weather-icon" class="weather-icon"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                    <div id="temperature" class="temperature">--°C</div>
+                    <div id="weather-desc" class="weather-desc">Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Widget -->
+        <section class="widget glass-panel" id="map-widget">
+            <div class="widget-header">
+                <i class="fa-solid fa-map-location-dot"></i> Explore Map
+            </div>
+            <div class="widget-content map-content">
+                <div class="map-toolbar" role="group" aria-label="Map view options">
+                    <button type="button" class="map-view-btn active" data-map-layer="street">
+                        <i class="fa-solid fa-road"></i> Map
+                    </button>
+                    <button type="button" class="map-view-btn" data-map-layer="satellite">
+                        <i class="fa-solid fa-earth-americas"></i> Satellite
+                    </button>
+                    <button type="button" class="map-view-btn" id="street-view-btn">
+                        <i class="fa-solid fa-street-view"></i> Street view
+                    </button>
+                    <button type="button" class="map-location-btn" id="map-location-btn" title="Use my location" aria-label="Use my location">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
+                </div>
+                <div id="map" class="map-canvas" aria-label="Interactive map"></div>
+                <div class="map-footer">
+                    <span id="map-location-label">London, UK</span>
+                    <a id="map-directions-link" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">
+                        Open directions <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Widget -->
+        <section class="widget glass-panel" id="calculator-widget">
+            <div class="widget-header">
+                <i class="fa-solid fa-calculator"></i> Calculator
+            </div>
+            <div class="widget-content">
+                <div class="calculator">
+                    <div id="calc-display" class="calc-display">0</div>
+                    <div class="calc-keypad">
+                        <button class="calc-btn act-btn" data-action="clear">C</button>
+                        <button class="calc-btn act-btn" data-action="delete"><i class="fa-solid fa-delete-left"></i></button>
+                        <button class="calc-btn op-btn" data-action="divide">÷</button>
+                        <button class="calc-btn op-btn" data-action="multiply">×</button>
+                        <button class="calc-btn num-btn" data-number="7">7</button>
+                        <button class="calc-btn num-btn" data-number="8">8</button>
+                        <button class="calc-btn num-btn" data-number="9">9</button>
+                        <button class="calc-btn op-btn" data-action="subtract">−</button>
+                        <button class="calc-btn num-btn" data-number="4">4</button>
+                        <button class="calc-btn num-btn" data-number="5">5</button>
+                        <button class="calc-btn num-btn" data-number="6">6</button>
+                        <button class="calc-btn op-btn" data-action="add">+</button>
+                        <button class="calc-btn num-btn" data-number="1">1</button>
+                        <button class="calc-btn num-btn" data-number="2">2</button>
+                        <button class="calc-btn num-btn" data-number="3">3</button>
+                        <button class="calc-btn eq-btn" data-action="calculate">=</button>
+                        <button class="calc-btn num-btn zero" data-number="0">0</button>
+                        <button class="calc-btn num-btn" data-number=".">.</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Todo Widget -->
+        <section class="widget glass-panel" id="todo-widget">
+            <div class="widget-header">
+                <i class="fa-solid fa-list-check"></i> To-Do List
+            </div>
+            <div class="widget-content todo-content">
+                <form id="todo-form" class="todo-form">
+                    <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off">
+                    <button type="submit" class="todo-add-btn"><i class="fa-solid fa-plus"></i></button>
+                </form>
+                <ul id="todo-list" class="todo-list">
+                    <!-- Tasks will be injected here -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>
