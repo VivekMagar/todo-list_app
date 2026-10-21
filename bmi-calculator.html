@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | Everyday Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation" aria-hidden="true"></div>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Everyday Tools home">
+            <span class="brand-icon"><i class="fa-solid fa-calculator"></i></span>
+            <span>Everyday <strong>Tools</strong></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li class="calculator-menu" id="calculator-menu">
+                    <button class="nav-link calculators-trigger" id="calculators-trigger" type="button" aria-expanded="false" aria-controls="calculator-menu-panel">
+                        Calculators <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="calculators-panel" id="calculator-menu-panel" aria-hidden="true" hidden>
+                        <div class="calculators-menu-columns" id="calculators-menu-columns"></div>
+                    </div>
+                </li>
+                <li class="calculator-menu" id="category-menu">
+                    <button class="nav-link calculators-trigger" id="categories-trigger" type="button" aria-expanded="false" aria-controls="categories-menu-panel">
+                        Categories <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="calculators-panel" id="categories-menu-panel" aria-hidden="true" hidden>
+                        <div class="calculators-menu-columns" id="categories-menu-columns"></div>
+                    </div>
+                </li>
+                <li><a class="nav-link" href="index.html#about">About</a></li>
+                <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+            <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        </button>
+    </header>
+    <main class="bmi-page">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="health-fitness-calculators.html">Calculators</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">BMI Calculator</span>
+        </nav>
+        <section class="bmi-tool" aria-labelledby="bmi-title">
+            <span class="eyebrow">Health &amp; Fitness</span>
+            <h1 id="bmi-title">BMI Calculator</h1>
+            <p>Enter your weight and height to estimate your body mass index.</p>
+            <form class="bmi-form" id="bmi-form">
+                <label for="bmi-weight">Weight (kg)
+                    <input id="bmi-weight" name="weight" type="number" min="1" max="500" step="0.1" required>
+                </label>
+                <label for="bmi-height">Height (cm)
+                    <input id="bmi-height" name="height" type="number" min="50" max="300" step="0.1" required>
+                </label>
+                <button type="submit">Calculate BMI</button>
+            </form>
+            <p class="bmi-result" id="bmi-result" role="status" aria-live="polite"></p>
+        </section>
+        <p class="last-updated">Last updated <time datetime="2026-10-11">11 October 2026</time></p>
+    </main>
+    <footer class="site-footer calculator-footer">
+        <a class="brand footer-brand" href="index.html"><span class="brand-icon"><i class="fa-solid fa-calculator"></i></span><span>Everyday <strong>Tools</strong></span></a>
+        <nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="health-fitness-calculators.html">Calculators</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

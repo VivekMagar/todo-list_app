@@ -3,19 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Focus Dashboard</title>
+        <title>Free Online Calculators | Everyday Tools</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-animation"></div>
-    <main class="dashboard">
+    <div class="background-animation" aria-hidden="true"></div>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Everyday Tools home">
+            <span class="brand-icon"><i class="fa-solid fa-calculator"></i></span>
+            <span>Everyday <strong>Tools</strong></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li class="calculator-menu" id="calculator-menu">
+                    <button class="nav-link calculators-trigger" id="calculators-trigger" type="button" aria-expanded="false" aria-controls="calculator-menu-panel">
+                        Calculators <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="calculators-panel" id="calculator-menu-panel" aria-hidden="true" hidden>
+                        <div class="calculators-menu-columns" id="calculators-menu-columns"></div>
+                    </div>
+                </li>
+                <li class="calculator-menu" id="category-menu">
+                    <button class="nav-link calculators-trigger" id="categories-trigger" type="button" aria-expanded="false" aria-controls="categories-menu-panel">
+                        Categories <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="calculators-panel" id="categories-menu-panel" aria-hidden="true" hidden>
+                        <div class="calculators-menu-columns" id="categories-menu-columns"></div>
+                    </div>
+                </li>
+                <li><a class="nav-link" href="index.html#about">About</a></li>
+                <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+            <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        </button>
+    </header>
+
+    <main class="site-main" id="home">
+        <section class="hero calculator-hero" aria-labelledby="hero-title">
+            <div class="hero-image-wrap" aria-hidden="true">
+                <img class="hero-image" src="https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=1800&q=85" alt="">
+            </div>
+            <div class="hero-copy">
+                <span class="eyebrow"><span class="eyebrow-dot"></span> Free online calculator tools</span>
+                <h1 id="hero-title">Free Online Calculators with <span>Step-by-Step Explanations</span></h1>
+                <p>Use simple online calculators for math, finance, health, percentages, age and everyday calculations. Enter your values, calculate, and get clear results in seconds.</p>
+                <form class="calculator-search" id="calculator-search-form" role="search">
+                    <label class="visually-hidden" for="calculator-search">Search calculators</label>
+                    <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                    <input id="calculator-search" name="q" type="search" placeholder="Search calculators..." autocomplete="off" aria-controls="calculator-search-results">
+                    <button type="submit" aria-label="Search calculators"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+                    <div class="calculator-search-results" id="calculator-search-results" hidden>
+                        <p class="search-results-status" id="search-results-status" role="status" aria-live="polite"></p>
+                        <ul id="search-results-list"></ul>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="content-section" id="calculators" aria-labelledby="calculators-title">
+            <div class="section-heading">
+                <div><span class="eyebrow">Your everyday toolkit</span><h2 id="calculators-title">Tools for right now</h2></div>
+                <p>Useful answers and a little more room to focus.</p>
+            </div>
+            <div class="dashboard">
         <!-- Clock Widget -->
         <section class="widget glass-panel" id="clock-widget">
             <div class="widget-header">
@@ -124,53 +187,25 @@
             </div>
         </section>
 
-        <!-- Calculator Widget -->
-        <section class="widget glass-panel" id="calculator-widget">
-            <div class="widget-header">
-                <i class="fa-solid fa-calculator"></i> Calculator
-            </div>
-            <div class="widget-content">
-                <div class="calculator">
-                    <div id="calc-display" class="calc-display">0</div>
-                    <div class="calc-keypad">
-                        <button class="calc-btn act-btn" data-action="clear">C</button>
-                        <button class="calc-btn act-btn" data-action="delete"><i class="fa-solid fa-delete-left"></i></button>
-                        <button class="calc-btn op-btn" data-action="divide">÷</button>
-                        <button class="calc-btn op-btn" data-action="multiply">×</button>
-                        <button class="calc-btn num-btn" data-number="7">7</button>
-                        <button class="calc-btn num-btn" data-number="8">8</button>
-                        <button class="calc-btn num-btn" data-number="9">9</button>
-                        <button class="calc-btn op-btn" data-action="subtract">−</button>
-                        <button class="calc-btn num-btn" data-number="4">4</button>
-                        <button class="calc-btn num-btn" data-number="5">5</button>
-                        <button class="calc-btn num-btn" data-number="6">6</button>
-                        <button class="calc-btn op-btn" data-action="add">+</button>
-                        <button class="calc-btn num-btn" data-number="1">1</button>
-                        <button class="calc-btn num-btn" data-number="2">2</button>
-                        <button class="calc-btn num-btn" data-number="3">3</button>
-                        <button class="calc-btn eq-btn" data-action="calculate">=</button>
-                        <button class="calc-btn num-btn zero" data-number="0">0</button>
-                        <button class="calc-btn num-btn" data-number=".">.</button>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Todo Widget -->
-        <section class="widget glass-panel" id="todo-widget">
-            <div class="widget-header">
-                <i class="fa-solid fa-list-check"></i> To-Do List
+        <section class="about-contact" aria-label="About and contact">
+            <div class="about-block" id="about">
+                <span class="eyebrow">About us</span>
+                <h2>Useful, uncomplicated, and here when you need it.</h2>
+                <p>Everyday Tools brings practical calculations and helpful daily utilities together in one calm, easy-to-navigate space.</p>
             </div>
-            <div class="widget-content todo-content">
-                <form id="todo-form" class="todo-form">
-                    <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off">
-                    <button type="submit" class="todo-add-btn"><i class="fa-solid fa-plus"></i></button>
-                </form>
-                <ul id="todo-list" class="todo-list">
-                    <!-- Tasks will be injected here -->
-                </ul>
+            <div class="contact-block" id="contact">
+                <span class="eyebrow">Get in touch</span>
+                <h2>Have a question?</h2>
+                <p>We’d be glad to hear from you.</p>
+                <a class="contact-link" href="mailto:hello@everydaytools.example"><i class="fa-regular fa-envelope"></i> hello@everydaytools.example</a>
             </div>
         </section>
+        <footer class="site-footer">
+            <span>Simple tools for the things that add up.</span>
+        </footer>
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
