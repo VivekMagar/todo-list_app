@@ -55,6 +55,13 @@ const categoryMenuData = [
     { name: 'Astronomy & Space Calculator', slug: 'astronomy-space', items: [{ name: 'Planetary Weight Calculator', id: 'planetary-weight-calculator' }, { name: 'Light Travel Time Calculator', id: 'light-travel-time-calculator' }] },
     { name: 'Food & Cooking Calculator', slug: 'food-cooking', items: [{ name: 'Recipe Scaler Calculator', id: 'recipe-scaler-calculator' }, { name: 'Cooking Unit Converter', id: 'cooking-unit-converter' }] },
     { name: 'Map, Distance & Navigation Calculator', slug: 'map-distance-navigation', items: [{ name: 'Coordinate Distance Calculator', id: 'coordinate-distance-calculator' }, { name: 'Travel Time Calculator', id: 'travel-time-calculator' }] },
+    { name: 'Medical & Clinical Calculators', slug: 'medical-clinical', items: [{ name: 'Clinical Dose Calculator', id: 'clinical-dose-calculator' }, { name: 'Body Surface Area Calculator', id: 'body-surface-area-calculator' }] },
+    { name: 'Physics & Engineering Calculators', slug: 'physics-engineering', items: [{ name: 'Force Calculator', id: 'force-calculator' }, { name: 'Ohm\'s Law Calculator', id: 'ohms-law-calculator' }] },
+    { name: 'Debit & Credit Calculators', slug: 'debit-credit', items: [{ name: 'Credit Card Payoff Calculator', id: 'credit-card-payoff-calculator' }, { name: 'Debt Payoff Planner', id: 'debt-payoff-planner' }] },
+    { name: 'Tax & Paycheck Calculators', slug: 'tax-paycheck', items: [{ name: 'Income Tax Estimator', id: 'income-tax-estimator' }, { name: 'Paycheck Calculator', id: 'paycheck-calculator' }] },
+    { name: 'Sleep & Wellness Calculators', slug: 'sleep-wellness', items: [{ name: 'Sleep Cycle Calculator', id: 'sleep-cycle-calculator' }, { name: 'Sleep Debt Calculator', id: 'sleep-debt-calculator' }] },
+    { name: 'Travel Calculators', slug: 'travel', items: [{ name: 'Flight Time Calculator', id: 'flight-time-calculator' }, { name: 'Trip Budget Calculator', id: 'trip-budget-calculator' }] },
+    { name: 'Weather & Climate Calculators', slug: 'weather-climate', items: [{ name: 'Temperature Converter', id: 'temperature-converter' }, { name: 'Rainfall Calculator', id: 'rainfall-calculator' }] },
     { name: 'Gaming & Esports Calculator', slug: 'gaming-esports', items: [{ name: 'K/D Ratio Calculator', id: 'kd-ratio-calculator' }, { name: 'eDPI Calculator', id: 'edpi-calculator' }] }
 ];
 
@@ -184,6 +191,7 @@ function initNavigationDropdown(menuId, triggerId, panelId, columnsId, groups) {
         clearTimeout(closeTimer);
         clearTimeout(hideTimer);
         panel.hidden = false;
+        panel.scrollTop = 0;
         panel.setAttribute('aria-hidden', 'false');
         requestAnimationFrame(() => panel.classList.add('is-open'));
         trigger.setAttribute('aria-expanded', 'true');
@@ -392,6 +400,68 @@ function initToolPage() {
             { name: 'travelDistance', label: 'Distance (km)', type: 'number', min: 0, step: 'any' },
             { name: 'travelSpeed', label: 'Average speed (km/h)', type: 'number', min: 0.1, step: 'any' }
         ],
+        'clinical-dose-calculator': [
+            { name: 'weightKg', label: 'Patient weight (kg)', type: 'number', min: 0, step: 'any' },
+            { name: 'dosePerKg', label: 'Dose (mg per kg)', type: 'number', min: 0, step: 'any' }
+        ],
+        'body-surface-area-calculator': [
+            { name: 'weightKg', label: 'Weight (kg)', type: 'number', min: 0, step: 'any' },
+            { name: 'heightCm', label: 'Height (cm)', type: 'number', min: 0, step: 'any' }
+        ],
+        'force-calculator': [
+            { name: 'massKg', label: 'Mass (kg)', type: 'number', min: 0, step: 'any' },
+            { name: 'acceleration', label: 'Acceleration (m/s²)', type: 'number', step: 'any' }
+        ],
+        'ohms-law-calculator': [
+            { name: 'voltage', label: 'Voltage (V)', type: 'number', min: 0, step: 'any' },
+            { name: 'resistance', label: 'Resistance (Ω)', type: 'number', min: 0, step: 'any' }
+        ],
+        'credit-card-payoff-calculator': [
+            { name: 'balance', label: 'Current balance ($)', type: 'number', min: 0, step: 'any' },
+            { name: 'apr', label: 'APR (%)', type: 'number', min: 0, step: 'any' },
+            { name: 'monthlyPayment', label: 'Monthly payment ($)', type: 'number', min: 0, step: 'any' }
+        ],
+        'debt-payoff-planner': [
+            { name: 'debtAmount', label: 'Debt balance ($)', type: 'number', min: 0, step: 'any' },
+            { name: 'apr', label: 'APR (%)', type: 'number', min: 0, step: 'any' },
+            { name: 'extraPayment', label: 'Extra monthly payment ($)', type: 'number', min: 0, step: 'any' }
+        ],
+        'income-tax-estimator': [
+            { name: 'income', label: 'Gross annual income ($)', type: 'number', min: 0, step: 'any' },
+            { name: 'rate', label: 'Estimated tax rate (%)', type: 'number', min: 0, max: 100, step: 'any' }
+        ],
+        'paycheck-calculator': [
+            { name: 'grossPay', label: 'Gross pay ($)', type: 'number', min: 0, step: 'any' },
+            { name: 'taxRate', label: 'Tax rate (%)', type: 'number', min: 0, max: 100, step: 'any' }
+        ],
+        'sleep-cycle-calculator': [
+            { name: 'sleepHours', label: 'Sleep duration (hours)', type: 'number', min: 0, step: 'any' },
+            { name: 'timeToFallAsleep', label: 'Minutes to fall asleep', type: 'number', min: 0, step: 1 }
+        ],
+        'sleep-debt-calculator': [
+            { name: 'actualSleep', label: 'Actual sleep (hours)', type: 'number', min: 0, step: 'any' },
+            { name: 'recommendedSleep', label: 'Recommended sleep (hours)', type: 'number', min: 0, step: 'any' }
+        ],
+        'flight-time-calculator': [
+            { name: 'distanceKm', label: 'Distance (km)', type: 'number', min: 0, step: 'any' },
+            { name: 'airSpeed', label: 'Average speed (km/h)', type: 'number', min: 0, step: 'any' }
+        ],
+        'trip-budget-calculator': [
+            { name: 'travelDistance', label: 'Distance (km)', type: 'number', min: 0, step: 'any' },
+            { name: 'fuelEfficiency', label: 'Fuel efficiency (km/L)', type: 'number', min: 0, step: 'any' },
+            { name: 'fuelPrice', label: 'Fuel price ($/L)', type: 'number', min: 0, step: 'any' },
+            { name: 'lodging', label: 'Lodging ($)', type: 'number', min: 0, step: 'any' },
+            { name: 'meals', label: 'Meals ($)', type: 'number', min: 0, step: 'any' }
+        ],
+        'temperature-converter': [
+            { name: 'value', label: 'Value', type: 'number', step: 'any' },
+            { name: 'fromUnit', label: 'From', type: 'select', options: [['c', 'Celsius'], ['f', 'Fahrenheit'], ['k', 'Kelvin']] },
+            { name: 'toUnit', label: 'To', type: 'select', options: [['c', 'Celsius'], ['f', 'Fahrenheit'], ['k', 'Kelvin']] }
+        ],
+        'rainfall-calculator': [
+            { name: 'rainfallMm', label: 'Rainfall (mm)', type: 'number', min: 0, step: 'any' },
+            { name: 'areaSqM', label: 'Catchment area (m²)', type: 'number', min: 0, step: 'any' }
+        ],
         'kd-ratio-calculator': [
             { name: 'kills', label: 'Kills', type: 'number', min: 0, step: 1 },
             { name: 'deaths', label: 'Deaths', type: 'number', min: 0, step: 1 }
@@ -517,6 +587,51 @@ function initToolPage() {
         } else if (toolId === 'travel-time-calculator') {
             const hours = number('travelDistance') / number('travelSpeed');
             answer = `Estimated travel time: ${Math.floor(hours)} h ${Math.round((hours % 1) * 60)} min.`;
+        } else if (toolId === 'clinical-dose-calculator') {
+            const dose = number('weightKg') * number('dosePerKg');
+            answer = `Total prescribed dose: ${dose.toFixed(2)} mg.`;
+        } else if (toolId === 'body-surface-area-calculator') {
+            const bsa = Math.sqrt((number('weightKg') * number('heightCm')) / 3600);
+            answer = `Estimated body surface area: ${bsa.toFixed(2)} m².`;
+        } else if (toolId === 'force-calculator') {
+            answer = `Force: ${(number('massKg') * number('acceleration')).toFixed(2)} N.`;
+        } else if (toolId === 'ohms-law-calculator') {
+            answer = `Current: ${(number('voltage') / number('resistance')).toFixed(2)} A.`;
+        } else if (toolId === 'credit-card-payoff-calculator') {
+            const monthlyRate = number('apr') / 1200;
+            const months = monthlyRate === 0 ? number('balance') / number('monthlyPayment') : Math.ceil(Math.log(number('monthlyPayment') / (number('monthlyPayment') - number('balance') * monthlyRate)) / Math.log(1 + monthlyRate));
+            answer = `Estimated payoff time: ${Math.max(1, months)} months. Total paid: ${money(number('monthlyPayment') * Math.max(1, months))}.`;
+        } else if (toolId === 'debt-payoff-planner') {
+            const monthlyRate = number('apr') / 1200;
+            const payment = number('extraPayment') + (number('debtAmount') * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -12));
+            answer = `Estimated monthly plan: ${money(payment)} with a focused extra payment. Total first-year cost: ${money(payment * 12)}.`;
+        } else if (toolId === 'income-tax-estimator') {
+            const tax = number('income') * (number('rate') / 100);
+            answer = `Estimated taxes: ${money(tax)}. Take-home estimate: ${money(number('income') - tax)}.`;
+        } else if (toolId === 'paycheck-calculator') {
+            const net = number('grossPay') * (1 - number('taxRate') / 100);
+            answer = `Estimated net pay: ${money(net)}.`;
+        } else if (toolId === 'sleep-cycle-calculator') {
+            const wakeUp = number('sleepHours') + number('timeToFallAsleep') / 60;
+            answer = `Ideal wake-up target: about ${wakeUp.toFixed(1)} hours of sleep. Aim for a 90-minute sleep-cycle rhythm.`;
+        } else if (toolId === 'sleep-debt-calculator') {
+            const debt = Math.max(0, number('recommendedSleep') - number('actualSleep'));
+            answer = `Sleep debt: ${debt.toFixed(1)} hours.`;
+        } else if (toolId === 'flight-time-calculator') {
+            const hours = number('distanceKm') / number('airSpeed');
+            answer = `Estimated flight time: ${Math.floor(hours)} h ${Math.round((hours % 1) * 60)} min.`;
+        } else if (toolId === 'trip-budget-calculator') {
+            const fuelNeeded = number('travelDistance') / number('fuelEfficiency');
+            const fuelCost = fuelNeeded * number('fuelPrice');
+            const total = fuelCost + number('lodging') + number('meals');
+            answer = `Fuel cost: ${money(fuelCost)}. Estimated trip total: ${money(total)}.`;
+        } else if (toolId === 'temperature-converter') {
+            const celsius = values.fromUnit === 'c' ? number('value') : values.fromUnit === 'f' ? (number('value') - 32) * 5 / 9 : number('value') - 273.15;
+            const converted = values.toUnit === 'c' ? celsius : values.toUnit === 'f' ? (celsius * 9 / 5) + 32 : celsius + 273.15;
+            answer = `${number('value')} ${values.fromUnit.toUpperCase()} = ${converted.toFixed(2)} ${values.toUnit.toUpperCase()}.`;
+        } else if (toolId === 'rainfall-calculator') {
+            const liters = (number('rainfallMm') * number('areaSqM')) / 1000;
+            answer = `Collected water volume: ${liters.toFixed(2)} liters.`;
         } else if (toolId === 'kd-ratio-calculator') {
             const kills = number('kills');
             const deaths = number('deaths');
